@@ -1,5 +1,7 @@
 # Change Log
 
+## [Unreleased]
+
 ## [1.2.0] - 2018-03-14
 
 * **API** Add [UTF8][doc:UTF8] to encode UTF strings in a possibly
@@ -131,6 +133,7 @@
 
 * Initial release.
 
+[Unreleased]: https://github.com/pabigot/buffer-layout/compare/v1.2.0...next
 [1.2.0]: https://github.com/pabigot/buffer-layout/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/pabigot/buffer-layout/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/pabigot/buffer-layout/compare/v0.13.0...v1.0.0
