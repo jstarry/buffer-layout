@@ -1,6 +1,6 @@
 {
   "name": "buffer-layout",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "description": "Translation between JavaScript values and Buffers",
   "keywords": [
     "Buffer",
@@ -17,6 +17,11 @@
   "license": "MIT",
   "author": "Peter A. Bigot <pab@pabigot.com>",
   "main": "./lib/Layout.js",
+  "types": "./lib/Layout.d.ts",
+  "files": ["./lib"],
+  "dependencies": {
+    "buffer": "~6.0.3"
+  },
   "devDependencies": {
     "coveralls": "^3.0.0",
     "eslint": "~4.18.2",
@@ -25,7 +30,8 @@
     "istanbul": "~0.4.5",
     "jsdoc": "~3.5.5",
     "lodash": "~4.17.5",
-    "mocha": "~5.0.4"
+    "mocha": "~5.0.4",
+    "typescript": "~4.3.5"
   },
   "engines": {
     "node": ">=4.5"

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "outDir": "lib",
+  },
+  "include": ["lib/Layout.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
