@@ -134,9 +134,7 @@ import {Buffer} from "buffer";
 
 'use strict';
 
-interface LayoutObject<T> {
-  [key:string]: T;
-}
+type LayoutObject = {[key:string]: any};
 
 /**
  * Base class for layout objects.
@@ -201,7 +199,7 @@ export class Layout {
    *
    * See {@link bindConstructorLayout}.
    */
-  makeDestinationObject(): LayoutObject<any> {
+  makeDestinationObject(): LayoutObject {
     return {};
   }
 
@@ -313,7 +311,7 @@ export class Layout {
    *
    * @return {(Object|undefined)}
    */
-  fromArray(values: Array<any>): LayoutObject<any> | undefined {
+  fromArray(values: Array<any>): LayoutObject | undefined {
     return undefined;
   }
 }
@@ -1249,7 +1247,7 @@ export class Structure extends Layout {
   }
 
   /** @override */
-  decode(b: Uint8Array, offset?: number): object {
+  decode(b: Uint8Array, offset?: number): LayoutObject {
     if (undefined === offset) {
       offset = 0;
     }
@@ -1272,7 +1270,7 @@ export class Structure extends Layout {
    * If `src` is missing a property for a member with a defined {@link
    * Layout#property|property} the corresponding region of the buffer is
    * left unmodified. */
-  encode(src: LayoutObject<any>, b: Uint8Array, offset?: number): number {
+  encode(src: LayoutObject, b: Uint8Array, offset?: number): number {
     if (undefined === offset) {
       offset = 0;
     }
@@ -1304,7 +1302,7 @@ export class Structure extends Layout {
   }
 
   /** @override */
-  fromArray(values: Array<any>): object {
+  fromArray(values: Array<any>): LayoutObject {
     const dest = this.makeDestinationObject();
     for (const fd of this.fields) {
       if ((undefined !== fd.property)
@@ -1514,8 +1512,8 @@ export class Union extends Layout {
   defaultLayout: Layout | null;
   registry: {[key: number]: VariantLayout};
 
-  getSourceVariant: (src: object) => VariantLayout | undefined;
-  configGetSourceVariant: (getSourceVariant: (src: object) => VariantLayout | undefined) => void;
+  getSourceVariant: (src: LayoutObject) => VariantLayout | undefined;
+  configGetSourceVariant: (getSourceVariant: (src: LayoutObject) => VariantLayout | undefined) => void;
 
   constructor(discr: Layout | UnionDiscriminator, defaultLayout: Layout | null, property: string) {
     const upv = ((discr instanceof UInt)
@@ -1684,7 +1682,7 @@ export class Union extends Layout {
    * @throws {Error} - if `src` cannot be associated with a default or
    * registered variant.
    */
-  defaultGetSourceVariant(src: LayoutObject<any>): VariantLayout | undefined {
+  defaultGetSourceVariant(src: LayoutObject): VariantLayout | undefined {
     if (src.hasOwnProperty(this.discriminator.property)) {
       if (this.defaultLayout && this.defaultLayout.property
           && src.hasOwnProperty(this.defaultLayout.property)) {
@@ -1744,7 +1742,7 @@ export class Union extends Layout {
    * {@link Union#defaultLayout|default layout}.  To encode variants
    * use the appropriate variant-specific {@link VariantLayout#encode}
    * method. */
-  encode(src: LayoutObject<any>, b: Uint8Array, offset?: number): number {
+  encode(src: LayoutObject, b: Uint8Array, offset?: number): number {
     if (undefined === offset) {
       offset = 0;
     }
@@ -1917,7 +1915,7 @@ export class VariantLayout extends Layout {
   }
 
   /** @override */
-  decode(b: Uint8Array, offset?: number): LayoutObject<any> {
+  decode(b: Uint8Array, offset?: number): LayoutObject {
     const dest = this.makeDestinationObject();
     if (undefined === offset) {
       offset = 0;
@@ -1942,7 +1940,7 @@ export class VariantLayout extends Layout {
   }
 
   /** @override */
-  encode(src: LayoutObject<any>, b: Uint8Array, offset?: number): number {
+  encode(src: LayoutObject, b: Uint8Array, offset?: number): number {
     if (undefined === offset) {
       offset = 0;
     }
@@ -1971,7 +1969,7 @@ export class VariantLayout extends Layout {
 
   /** Delegate {@link Layout#fromArray|fromArray} to {@link
    * VariantLayout#layout|layout}. */
-  fromArray(values: Array<any>): object | undefined {
+  fromArray(values: Array<any>): LayoutObject | undefined {
     if (this.layout) {
       return this.layout.fromArray(values);
     }
@@ -2082,7 +2080,7 @@ export class BitStructure extends Layout {
   }
 
   /** @override */
-  decode(b: Uint8Array, offset?: number): LayoutObject<any> {
+  decode(b: Uint8Array, offset?: number): LayoutObject {
     const dest = this.makeDestinationObject();
     if (undefined === offset) {
       offset = 0;
@@ -2102,7 +2100,7 @@ export class BitStructure extends Layout {
    * If `src` is missing a property for a member with a defined {@link
    * Layout#property|property} the corresponding region of the packed
    * value is left unmodified.  Unused bits are also left unmodified. */
-  encode(src: LayoutObject<any>, b: Uint8Array, offset?: number): number {
+  encode(src: LayoutObject, b: Uint8Array, offset?: number): number {
     if (undefined === offset) {
       offset = 0;
     }

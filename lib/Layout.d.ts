@@ -1,8 +1,8 @@
 /// <reference types="node" />
 import { Buffer } from "buffer";
-interface LayoutObject<T> {
-    [key: string]: T;
-}
+declare type LayoutObject = {
+    [key: string]: any;
+};
 /**
  * Base class for layout objects.
  *
@@ -39,7 +39,7 @@ export declare class Layout {
      *
      * See {@link bindConstructorLayout}.
      */
-    makeDestinationObject(): LayoutObject<any>;
+    makeDestinationObject(): LayoutObject;
     /**
      * Decode from a Buffer into an JavaScript value.
      *
@@ -130,7 +130,7 @@ export declare class Layout {
      *
      * @return {(Object|undefined)}
      */
-    fromArray(values: Array<any>): LayoutObject<any> | undefined;
+    fromArray(values: Array<any>): LayoutObject | undefined;
 }
 export declare function nameWithProperty(name: string, lo: any): string;
 /**
@@ -560,15 +560,15 @@ export declare class Structure extends Layout {
     /** @override */
     getSpan(b: Uint8Array, offset?: number): number;
     /** @override */
-    decode(b: Uint8Array, offset?: number): object;
+    decode(b: Uint8Array, offset?: number): LayoutObject;
     /** Implement {@link Layout#encode|encode} for {@link Structure}.
      *
      * If `src` is missing a property for a member with a defined {@link
      * Layout#property|property} the corresponding region of the buffer is
      * left unmodified. */
-    encode(src: LayoutObject<any>, b: Uint8Array, offset?: number): number;
+    encode(src: LayoutObject, b: Uint8Array, offset?: number): number;
     /** @override */
-    fromArray(values: Array<any>): object;
+    fromArray(values: Array<any>): LayoutObject;
     /**
      * Get access to the layout of a given property.
      *
@@ -710,8 +710,8 @@ export declare class Union extends Layout {
     registry: {
         [key: number]: VariantLayout;
     };
-    getSourceVariant: (src: object) => VariantLayout | undefined;
-    configGetSourceVariant: (getSourceVariant: (src: object) => VariantLayout | undefined) => void;
+    getSourceVariant: (src: LayoutObject) => VariantLayout | undefined;
+    configGetSourceVariant: (getSourceVariant: (src: LayoutObject) => VariantLayout | undefined) => void;
     constructor(discr: Layout | UnionDiscriminator, defaultLayout: Layout | null, property: string);
     /** @override */
     getSpan(b: Uint8Array, offset?: number): number;
@@ -744,7 +744,7 @@ export declare class Union extends Layout {
      * @throws {Error} - if `src` cannot be associated with a default or
      * registered variant.
      */
-    defaultGetSourceVariant(src: LayoutObject<any>): VariantLayout | undefined;
+    defaultGetSourceVariant(src: LayoutObject): VariantLayout | undefined;
     /** Implement {@link Layout#decode|decode} for {@link Union}.
      *
      * If the variant is {@link Union#addVariant|registered} the return
@@ -760,7 +760,7 @@ export declare class Union extends Layout {
      * {@link Union#defaultLayout|default layout}.  To encode variants
      * use the appropriate variant-specific {@link VariantLayout#encode}
      * method. */
-    encode(src: LayoutObject<any>, b: Uint8Array, offset?: number): number;
+    encode(src: LayoutObject, b: Uint8Array, offset?: number): number;
     /** Register a new variant structure within a union.  The newly
      * created variant is returned.
      *
@@ -828,12 +828,12 @@ export declare class VariantLayout extends Layout {
     /** @override */
     getSpan(b: Uint8Array, offset?: number): number;
     /** @override */
-    decode(b: Uint8Array, offset?: number): LayoutObject<any>;
+    decode(b: Uint8Array, offset?: number): LayoutObject;
     /** @override */
-    encode(src: LayoutObject<any>, b: Uint8Array, offset?: number): number;
+    encode(src: LayoutObject, b: Uint8Array, offset?: number): number;
     /** Delegate {@link Layout#fromArray|fromArray} to {@link
      * VariantLayout#layout|layout}. */
-    fromArray(values: Array<any>): object | undefined;
+    fromArray(values: Array<any>): LayoutObject | undefined;
 }
 /**
  * Contain a sequence of bit fields as an unsigned integer.
@@ -874,13 +874,13 @@ export declare class BitStructure extends Layout {
     _packedGetValue: () => number;
     constructor(word: Layout, msb: boolean | string, property?: string);
     /** @override */
-    decode(b: Uint8Array, offset?: number): LayoutObject<any>;
+    decode(b: Uint8Array, offset?: number): LayoutObject;
     /** Implement {@link Layout#encode|encode} for {@link BitStructure}.
      *
      * If `src` is missing a property for a member with a defined {@link
      * Layout#property|property} the corresponding region of the packed
      * value is left unmodified.  Unused bits are also left unmodified. */
-    encode(src: LayoutObject<any>, b: Uint8Array, offset?: number): number;
+    encode(src: LayoutObject, b: Uint8Array, offset?: number): number;
     /** Register a new bitfield with a containing bit structure.  The
      * resulting bitfield is returned.
      *
