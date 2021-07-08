@@ -2735,7 +2735,7 @@ export const f64 = ((property: string) => new Double(property));
 export const f64be = ((property: string) => new DoubleBE(property));
 
 /** Factory for {@link Structure} values. */
-export const struct = ((fields: Layout[], property: string, decodePrefixes: boolean) => new Structure(fields, property, decodePrefixes));
+export const struct = ((fields: Layout[], property?: string, decodePrefixes?: boolean) => new Structure(fields, property, decodePrefixes));
 
 /** Factory for {@link BitStructure} values. */
 export const bits = ((word: Layout, msb: boolean | string, property?: string) => new BitStructure(word, msb, property));
@@ -2756,7 +2756,7 @@ export const blob = ((length: number | ExternalLayout, property: string) => new 
 export const cstr = ((property: string) => new CString(property));
 
 /** Factory for {@link UTF8} values. */
-export const utf8 = ((maxSpan: number, property: string) => new UTF8(maxSpan, property));
+export const utf8 = ((maxSpan: number, property?: string) => new UTF8(maxSpan, property));
 
 /** Factory for {@link Constant} values. */
 export const constant = ((value: any, property: string) => new Constant(value, property));

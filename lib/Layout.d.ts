@@ -1169,7 +1169,7 @@ export declare const f64: (property: string) => Double;
 /** Factory for {@link DoubleBE|big-endian 64-bit floating point} values. */
 export declare const f64be: (property: string) => DoubleBE;
 /** Factory for {@link Structure} values. */
-export declare const struct: (fields: Layout[], property: string, decodePrefixes: boolean) => Structure;
+export declare const struct: (fields: Layout[], property?: string | undefined, decodePrefixes?: boolean | undefined) => Structure;
 /** Factory for {@link BitStructure} values. */
 export declare const bits: (word: Layout, msb: boolean | string, property?: string | undefined) => BitStructure;
 /** Factory for {@link Sequence} values. */
@@ -1183,7 +1183,7 @@ export declare const blob: (length: number | ExternalLayout, property: string) =
 /** Factory for {@link CString} values. */
 export declare const cstr: (property: string) => CString;
 /** Factory for {@link UTF8} values. */
-export declare const utf8: (maxSpan: number, property: string) => UTF8;
+export declare const utf8: (maxSpan: number, property?: string | undefined) => UTF8;
 /** Factory for {@link Constant} values. */
 export declare const constant: (value: any, property: string) => Constant;
 export {};
