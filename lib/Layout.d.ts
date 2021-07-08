@@ -213,7 +213,7 @@ export declare class ExternalLayout extends Layout {
  */
 export declare class GreedyCount extends ExternalLayout {
     elementSpan: number;
-    constructor(elementSpan: number, property: string);
+    constructor(elementSpan: number, property?: string);
     /** @override */
     isCount(): boolean;
     /** @override */
@@ -269,7 +269,7 @@ export declare class OffsetLayout extends ExternalLayout {
  * @augments {Layout}
  */
 export declare class UInt extends Layout {
-    constructor(span: number, property: string);
+    constructor(span: number, property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -292,7 +292,7 @@ export declare class UInt extends Layout {
  * @augments {Layout}
  */
 export declare class UIntBE extends Layout {
-    constructor(span: number, property: string);
+    constructor(span: number, property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -315,7 +315,7 @@ export declare class UIntBE extends Layout {
  * @augments {Layout}
  */
 export declare class Int extends Layout {
-    constructor(span: number, property: string);
+    constructor(span: number, property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -338,7 +338,7 @@ export declare class Int extends Layout {
  * @augments {Layout}
  */
 export declare class IntBE extends Layout {
-    constructor(span: number, property: string);
+    constructor(span: number, property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -356,7 +356,7 @@ export declare class IntBE extends Layout {
  * @augments {Layout}
  */
 export declare class NearUInt64 extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -374,7 +374,7 @@ export declare class NearUInt64 extends Layout {
  * @augments {Layout}
  */
 export declare class NearUInt64BE extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -392,7 +392,7 @@ export declare class NearUInt64BE extends Layout {
  * @augments {Layout}
  */
 export declare class NearInt64 extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -410,7 +410,7 @@ export declare class NearInt64 extends Layout {
  * @augments {Layout}
  */
 export declare class NearInt64BE extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -427,7 +427,7 @@ export declare class NearInt64BE extends Layout {
  * @augments {Layout}
  */
 export declare class Float extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -444,7 +444,7 @@ export declare class Float extends Layout {
  * @augments {Layout}
  */
 export declare class FloatBE extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -461,7 +461,7 @@ export declare class FloatBE extends Layout {
  * @augments {Layout}
  */
 export declare class Double extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -478,7 +478,7 @@ export declare class Double extends Layout {
  * @augments {Layout}
  */
 export declare class DoubleBE extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     decode(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -504,7 +504,7 @@ export declare class DoubleBE extends Layout {
 export declare class Sequence extends Layout {
     elementLayout: Layout;
     count: number | ExternalLayout;
-    constructor(elementLayout: Layout, count: number | ExternalLayout, property: string);
+    constructor(elementLayout: Layout, count: number | ExternalLayout, property?: string);
     /** @override */
     getSpan(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -988,7 +988,7 @@ export declare class Boolean extends BitField {
  */
 export declare class Blob extends Layout {
     length: number | ExternalLayout;
-    constructor(length: number | ExternalLayout, property: string);
+    constructor(length: number | ExternalLayout, property?: string);
     /** @override */
     getSpan(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -1014,7 +1014,7 @@ export declare class Blob extends Layout {
  * @augments {Layout}
  */
 export declare class CString extends Layout {
-    constructor(property: string);
+    constructor(property?: string);
     /** @override */
     getSpan(b: Uint8Array, offset?: number): number;
     /** @override */
@@ -1072,118 +1072,118 @@ export declare class UTF8 extends Layout {
  */
 export declare class Constant extends Layout {
     value: any;
-    constructor(value: any, property: string);
+    constructor(value: any, property?: string);
     /** @override */
     decode(b?: Uint8Array, offset?: number): any;
     /** @override */
     encode(src: any, b?: Uint8Array, offset?: number): number;
 }
 /** Factory for {@link GreedyCount}. */
-export declare const greedy: (elementSpan: number, property: string) => GreedyCount;
+export declare const greedy: (elementSpan: number, property?: string | undefined) => GreedyCount;
 /** Factory for {@link OffsetLayout}. */
 export declare const offset: (layout: Layout, offset?: number | undefined, property?: string | undefined) => OffsetLayout;
 /** Factory for {@link UInt|unsigned int layouts} spanning one
  * byte. */
-export declare const u8: (property: string) => UInt;
+export declare const u8: (property?: string | undefined) => UInt;
 /** Factory for {@link UInt|little-endian unsigned int layouts}
  * spanning two bytes. */
-export declare const u16: (property: string) => UInt;
+export declare const u16: (property?: string | undefined) => UInt;
 /** Factory for {@link UInt|little-endian unsigned int layouts}
  * spanning three bytes. */
-export declare const u24: (property: string) => UInt;
+export declare const u24: (property?: string | undefined) => UInt;
 /** Factory for {@link UInt|little-endian unsigned int layouts}
  * spanning four bytes. */
-export declare const u32: (property: string) => UInt;
+export declare const u32: (property?: string | undefined) => UInt;
 /** Factory for {@link UInt|little-endian unsigned int layouts}
  * spanning five bytes. */
-export declare const u40: (property: string) => UInt;
+export declare const u40: (property?: string | undefined) => UInt;
 /** Factory for {@link UInt|little-endian unsigned int layouts}
  * spanning six bytes. */
-export declare const u48: (property: string) => UInt;
+export declare const u48: (property?: string | undefined) => UInt;
 /** Factory for {@link NearUInt64|little-endian unsigned int
  * layouts} interpreted as Numbers. */
-export declare const nu64: (property: string) => NearUInt64;
+export declare const nu64: (property?: string | undefined) => NearUInt64;
 /** Factory for {@link UInt|big-endian unsigned int layouts}
  * spanning two bytes. */
-export declare const u16be: (property: string) => UIntBE;
+export declare const u16be: (property?: string | undefined) => UIntBE;
 /** Factory for {@link UInt|big-endian unsigned int layouts}
  * spanning three bytes. */
-export declare const u24be: (property: string) => UIntBE;
+export declare const u24be: (property?: string | undefined) => UIntBE;
 /** Factory for {@link UInt|big-endian unsigned int layouts}
  * spanning four bytes. */
-export declare const u32be: (property: string) => UIntBE;
+export declare const u32be: (property?: string | undefined) => UIntBE;
 /** Factory for {@link UInt|big-endian unsigned int layouts}
  * spanning five bytes. */
-export declare const u40be: (property: string) => UIntBE;
+export declare const u40be: (property?: string | undefined) => UIntBE;
 /** Factory for {@link UInt|big-endian unsigned int layouts}
  * spanning six bytes. */
-export declare const u48be: (property: string) => UIntBE;
+export declare const u48be: (property?: string | undefined) => UIntBE;
 /** Factory for {@link NearUInt64BE|big-endian unsigned int
  * layouts} interpreted as Numbers. */
-export declare const nu64be: (property: string) => NearUInt64BE;
+export declare const nu64be: (property?: string | undefined) => NearUInt64BE;
 /** Factory for {@link Int|signed int layouts} spanning one
  * byte. */
-export declare const s8: (property: string) => Int;
+export declare const s8: (property?: string | undefined) => Int;
 /** Factory for {@link Int|little-endian signed int layouts}
  * spanning two bytes. */
-export declare const s16: (property: string) => Int;
+export declare const s16: (property?: string | undefined) => Int;
 /** Factory for {@link Int|little-endian signed int layouts}
  * spanning three bytes. */
-export declare const s24: (property: string) => Int;
+export declare const s24: (property?: string | undefined) => Int;
 /** Factory for {@link Int|little-endian signed int layouts}
  * spanning four bytes. */
-export declare const s32: (property: string) => Int;
+export declare const s32: (property?: string | undefined) => Int;
 /** Factory for {@link Int|little-endian signed int layouts}
  * spanning five bytes. */
-export declare const s40: (property: string) => Int;
+export declare const s40: (property?: string | undefined) => Int;
 /** Factory for {@link Int|little-endian signed int layouts}
  * spanning six bytes. */
-export declare const s48: (property: string) => Int;
+export declare const s48: (property?: string | undefined) => Int;
 /** Factory for {@link NearInt64|little-endian signed int layouts}
  * interpreted as Numbers. */
-export declare const ns64: (property: string) => NearInt64;
+export declare const ns64: (property?: string | undefined) => NearInt64;
 /** Factory for {@link Int|big-endian signed int layouts}
  * spanning two bytes. */
-export declare const s16be: (property: string) => IntBE;
+export declare const s16be: (property?: string | undefined) => IntBE;
 /** Factory for {@link Int|big-endian signed int layouts}
  * spanning three bytes. */
-export declare const s24be: (property: string) => IntBE;
+export declare const s24be: (property?: string | undefined) => IntBE;
 /** Factory for {@link Int|big-endian signed int layouts}
  * spanning four bytes. */
-export declare const s32be: (property: string) => IntBE;
+export declare const s32be: (property?: string | undefined) => IntBE;
 /** Factory for {@link Int|big-endian signed int layouts}
  * spanning five bytes. */
-export declare const s40be: (property: string) => IntBE;
+export declare const s40be: (property?: string | undefined) => IntBE;
 /** Factory for {@link Int|big-endian signed int layouts}
  * spanning six bytes. */
-export declare const s48be: (property: string) => IntBE;
+export declare const s48be: (property?: string | undefined) => IntBE;
 /** Factory for {@link NearInt64BE|big-endian signed int layouts}
  * interpreted as Numbers. */
-export declare const ns64be: (property: string) => NearInt64BE;
+export declare const ns64be: (property?: string | undefined) => NearInt64BE;
 /** Factory for {@link Float|little-endian 32-bit floating point} values. */
-export declare const f32: (property: string) => Float;
+export declare const f32: (property?: string | undefined) => Float;
 /** Factory for {@link FloatBE|big-endian 32-bit floating point} values. */
-export declare const f32be: (property: string) => FloatBE;
+export declare const f32be: (property?: string | undefined) => FloatBE;
 /** Factory for {@link Double|little-endian 64-bit floating point} values. */
-export declare const f64: (property: string) => Double;
+export declare const f64: (property?: string | undefined) => Double;
 /** Factory for {@link DoubleBE|big-endian 64-bit floating point} values. */
-export declare const f64be: (property: string) => DoubleBE;
+export declare const f64be: (property?: string | undefined) => DoubleBE;
 /** Factory for {@link Structure} values. */
 export declare const struct: (fields: Layout[], property?: string | undefined, decodePrefixes?: boolean | undefined) => Structure;
 /** Factory for {@link BitStructure} values. */
 export declare const bits: (word: Layout, msb: boolean | string, property?: string | undefined) => BitStructure;
 /** Factory for {@link Sequence} values. */
-export declare const seq: (elementLayout: Layout, count: number | ExternalLayout, property: string) => Sequence;
+export declare const seq: (elementLayout: Layout, count: number | ExternalLayout, property?: string | undefined) => Sequence;
 /** Factory for {@link Union} values. */
 export declare const union: (discr: Layout | UnionDiscriminator, defaultLayout: Layout | null, property: string) => Union;
 /** Factory for {@link UnionLayoutDiscriminator} values. */
 export declare const unionLayoutDiscriminator: (layout: ExternalLayout, property: string) => UnionLayoutDiscriminator;
 /** Factory for {@link Blob} values. */
-export declare const blob: (length: number | ExternalLayout, property: string) => Blob;
+export declare const blob: (length: number | ExternalLayout, property?: string | undefined) => Blob;
 /** Factory for {@link CString} values. */
-export declare const cstr: (property: string) => CString;
+export declare const cstr: (property?: string | undefined) => CString;
 /** Factory for {@link UTF8} values. */
 export declare const utf8: (maxSpan: number, property?: string | undefined) => UTF8;
 /** Factory for {@link Constant} values. */
-export declare const constant: (value: any, property: string) => Constant;
+export declare const constant: (value: any, property?: string | undefined) => Constant;
 export {};
