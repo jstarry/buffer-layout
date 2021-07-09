@@ -17,9 +17,6 @@
   "license": "MIT",
   "author": "Peter A. Bigot <pab@pabigot.com>",
   "main": "./lib/Layout.js",
-  "dependencies": {
-    "buffer": "~6.0.3"
-  },
   "devDependencies": {
     "coveralls": "^3.0.0",
     "eslint": "~4.18.2",
